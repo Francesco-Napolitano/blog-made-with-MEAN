@@ -8,5 +8,9 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist"
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   }
 }

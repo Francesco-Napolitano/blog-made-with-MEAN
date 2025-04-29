@@ -8,7 +8,6 @@ import { auth } from './Middleware/Auth';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5000;
 const { ATLAS_URI } = process.env;
 
 if (!ATLAS_URI) {
@@ -54,6 +53,6 @@ mongoose
      .then(() => console.log('MongoDB Connected'))
      .catch((err) => console.log('MongoDB connection error:', err));
 
-app.listen(PORT, () => {
-     console.log(`Server is running on port ${PORT}`);
+app.listen(5200, () => {
+     console.log(`Server is running on port http://localhost:5200...`);
 });
