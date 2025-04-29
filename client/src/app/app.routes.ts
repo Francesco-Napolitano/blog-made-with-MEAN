@@ -7,5 +7,7 @@ export const routes: Routes = [{
       const m = await import('./features/auth/login/login.component');
       return m.LoginComponent;
    }
-}
+},
+// Add other routes as needed
+
 ];
