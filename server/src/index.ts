@@ -20,9 +20,6 @@ if (!ATLAS_URI) {
 
 app.use(cors());
 app.use(express.json());
-
-
-
 // Routes
 app.use('/api/auth', router);
 
@@ -30,8 +27,6 @@ app.use('/api/auth', router);
 app.get('/api/private', auth, (req, res) => {
      res.send('This is a protected route');
    });
-
-
 
 app.get('/', (req, res) => {
      res.send('Hello World!');
