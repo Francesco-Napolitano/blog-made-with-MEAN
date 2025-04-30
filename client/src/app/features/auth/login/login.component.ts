@@ -1,24 +1,25 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit{
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  username = signal('');
-  password = signal('');
+export class LoginComponent {
+  private formBuilder = inject(FormBuilder);
+
+  profileForm = this.formBuilder.group({
+    email: ['', Validators.required],
+    password: [''],
+  });
 
   onSubmit() {
-    // Implement your login logic here
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
-    // Add authentication logic and navigate to the next page upon successful login
+    // TODO: Use EventEmitter with form value
+    console.warn(this.profileForm.value);
   }
 
+  username = signal('');
+  password = signal('');
 }
