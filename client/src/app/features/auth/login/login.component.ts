@@ -21,7 +21,15 @@ export class LoginComponent {
     const { email, password } = this.profileForm.value;
 
     if (email && password) {
-      this.authService.login(email, password);
+      this.authService.login(email, password).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          sessionStorage.setItem('token', res.token);
+        },
+        error: (err) => {
+          console.error('Errore login', err);
+        },
+      });
     } else {
       console.log('Errore nel ricevimento dei dati');
     }
