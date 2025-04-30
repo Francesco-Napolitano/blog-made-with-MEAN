@@ -12,4 +12,12 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post(`${this.url}/api/auth/login`, { email, password });
   }
+
+  register(name: string, email: string, password: string) {
+    return this.http.post(`${this.url}/api/auth/register`, {
+      name,
+      email,
+      password,
+    });
+  }
 }

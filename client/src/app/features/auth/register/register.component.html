@@ -1,0 +1,46 @@
+<div class="font-display">
+  <form [formGroup]="profileForm" (submit)="onSubmit()">
+    <div>
+      <h1>Register</h1>
+      <div>
+        <label for="name">name: </label>
+        <input
+          class="border-1 m-3 ml-11"
+          id="name"
+          type="text"
+          formControlName="name"
+          required
+        />
+      </div>
+      <div>
+        <label for="email">email: </label>
+        <input
+          class="border-1 m-3 ml-11"
+          id="email"
+          type="text"
+          formControlName="email"
+          required
+        />
+      </div>
+      <div>
+        <label for="password">password: </label>
+        <input
+          id="password"
+          type="text"
+          formControlName="password"
+          required
+          class="border-1 m-3 ml-4"
+        />
+      </div>
+    </div>
+
+    <button
+      class="border-2 px-3 py-1 hover:bg-red-500 cursor-pointer"
+      type="submit"
+      [disabled]="!profileForm.valid"
+    >
+      Submit
+    </button>
+    <p>Form Status: {{ profileForm.status }}</p>
+  </form>
+</div>
