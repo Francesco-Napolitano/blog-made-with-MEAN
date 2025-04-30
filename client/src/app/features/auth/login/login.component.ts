@@ -19,7 +19,4 @@ export class LoginComponent {
     // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
   }
-
-  username = signal('');
-  password = signal('');
 }
