@@ -1,7 +1,7 @@
 <p>logout works!</p>
 <section class="flex">
   <p class="mx-5">Effettua il logout:</p>
-  <div class="example-button-row">
-    <button mat-stroked-button>Basic</button>
+  <div class="example-button-row" routerLink="/">
+    <button mat-stroked-button (click)="deleteToken()">Basic</button>
   </div>
 </section>
