@@ -17,4 +17,12 @@ export const routes: Routes = [
       return m.RegisterComponent;
     },
   },
+  {
+    path: 'logout',
+    pathMatch: 'full',
+    loadComponent: async () => {
+      const m = await import('./features/auth/logout/logout.component');
+      return m.LogoutComponent;
+    },
+  },
 ];
