@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class RegisterComponent {
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
+  statusMessage: string = '';
 
   profileForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -26,6 +27,7 @@ export class RegisterComponent {
         next: (res: any) => {
           console.log(res);
           sessionStorage.setItem('token', res.token);
+          this.statusMessage = 'Registrazione effettuata con successo';
         },
         error: (err) => {
           console.error('Errore login', err);

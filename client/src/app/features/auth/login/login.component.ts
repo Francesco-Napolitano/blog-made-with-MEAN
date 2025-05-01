@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class LoginComponent {
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
+  statusMessage: string = 'Login effettuato!';
 
   profileForm = this.formBuilder.group({
     email: ['', Validators.required],
@@ -25,6 +26,9 @@ export class LoginComponent {
         next: (res: any) => {
           console.log(res);
           sessionStorage.setItem('token', res.token);
+          setTimeout(() => {
+            this.statusMessage = '';
+          }, 3000);
         },
         error: (err) => {
           console.error('Errore login', err);
