@@ -41,6 +41,15 @@
     >
       Submit
     </button>
+    @if (statusMessage) {
+    <div
+      class="p-4 my-4 text-sm text-green-800 rounded-lg bg-green-50"
+      role="alert"
+    >
+      <span class="font-medium">Registrazione Effetuata!</span>
+    </div>
+    }
+
     <p>Form Status: {{ profileForm.status }}</p>
   </form>
 </div>

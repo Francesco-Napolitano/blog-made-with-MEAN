@@ -28,6 +28,9 @@ export class RegisterComponent {
           console.log(res);
           sessionStorage.setItem('token', res.token);
           this.statusMessage = 'Registrazione effettuata con successo';
+          setTimeout(() => {
+            this.statusMessage = '';
+          }, 3000);
         },
         error: (err) => {
           console.error('Errore login', err);
