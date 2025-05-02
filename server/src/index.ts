@@ -2,9 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { User } from './Models/user-model'
 import { router } from './Routes/auth'
-import { auth } from './Middleware/Auth'
 import { routerBlog } from './Routes/blog'
 
 dotenv.config()
