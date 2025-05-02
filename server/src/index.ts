@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { User } from './Models/user-model'
 import { router } from './Routes/auth'
 import { auth } from './Middleware/Auth'
+import { routerBlog } from './Routes/blog'
 
 dotenv.config()
 const app = express()
@@ -21,6 +22,7 @@ app.use(cors())
 app.use(express.json())
 // Routes
 app.use('/api/auth', router)
+app.use(routerBlog)
 
 mongoose
   .connect(ATLAS_URI)
