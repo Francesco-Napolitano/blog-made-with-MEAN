@@ -6,20 +6,21 @@ const blogModel = new mongoose.Schema(
     description: { type: String, required: true },
     image: { type: String, required: true },
     read_time: { type: String, required: true },
-    date: { type: new Date('<YYYY-mm-dd>'), required: true },
-    author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+    date: { type: Date, required: true },
+    category: {
+      type: String,
+      enum: [
+        'Informatica',
+        'Crescita Personale',
+        'Lavoro',
+        'Consigli',
+        'Riflessioni',
+      ],
       required: true,
     },
+    author: { type: String, required: true },
   },
   { timestamps: true }
 )
 
 export const Blog = mongoose.model('Blog', blogModel)
-// categoria:
-//   | 'Informatica'
-//   | 'Crescita Personale'
-//   | 'Lavoro'
-//   | 'Consigli'
-//   | 'Riflessioni'
