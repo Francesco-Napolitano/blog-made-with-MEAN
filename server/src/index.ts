@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { router } from './Routes/auth'
 import { routerBlog } from './Routes/blog'
+import { errorHandler } from './Middleware/errorHandler'
 
 dotenv.config()
 const app = express()
@@ -21,7 +22,7 @@ app.use(express.json())
 // Routes
 app.use('/api/auth', router)
 app.use('/post', routerBlog)
-
+app.use(errorHandler)
 mongoose
   .connect(ATLAS_URI)
   .then(() => console.log('MongoDB Connected'))
