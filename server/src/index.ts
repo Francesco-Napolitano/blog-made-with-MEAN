@@ -20,7 +20,7 @@ app.use(cors())
 app.use(express.json())
 // Routes
 app.use('/api/auth', router)
-app.use(routerBlog)
+app.use('/post', routerBlog)
 
 mongoose
   .connect(ATLAS_URI)
