@@ -27,16 +27,19 @@ routerBlog.get(
 
 routerBlog.get(
   '/:id',
-  wrap(async (req, res) => {
-    const postSelected = await Blog.findById(req.params._id)
-    res.status(200).send(postSelected)
+  wrap(async (id) => {
+    const postSelected = await Blog.findById(id)
+    console.log(postSelected)
   })
 )
 
-routerBlog.post('/add', authenticateJWT, authorizeRoles, async (req, res) => {
-  const { title, description, image, read_time, date, category, author } =
-    req.body
-  try {
+routerBlog.post(
+  '/add',
+  authenticateJWT,
+  authorizeRoles,
+  wrap(async (req, res) => {
+    const { title, description, image, read_time, date, category, author } =
+      req.body
     const newPost = new Blog({
       title,
       description,
@@ -48,15 +51,27 @@ routerBlog.post('/add', authenticateJWT, authorizeRoles, async (req, res) => {
     })
     await newPost.save()
     res.status(201).json({ message: 'Post added successfully' })
-  } catch (error) {
-    res.status(400).json({ error: 'Post already exists' })
-  }
-})
+  })
+)
 routerBlog.put(
   '/:id/update',
-  authorizeRoles,
   authenticateJWT,
-  async (req, res) => {}
+  authorizeRoles,
+  wrap(async (req, res) => {
+    const id = req.params._id
+    console.log(id)
+
+    let updatedBlog = {}
+    updatedBlog = req.body.title
+    updatedBlog = req.body.description
+    updatedBlog = req.body.image
+    updatedBlog = req.body.read_time
+    updatedBlog = req.body.date
+    updatedBlog = req.body.category
+    updatedBlog = req.body.author
+    await Blog.findByIdAndUpdate(id, updatedBlog)
+    res.status(200).send(updatedBlog)
+  })
 )
 routerBlog.delete(
   '/:id/delete',
