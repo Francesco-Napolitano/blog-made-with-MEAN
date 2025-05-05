@@ -33,7 +33,7 @@ routerBlog.get(
   })
 )
 
-routerBlog.post('/add', authorizeRoles, authenticateJWT, async (req, res) => {
+routerBlog.post('/add', authenticateJWT, authorizeRoles, async (req, res) => {
   const { title, description, image, read_time, date, category, author } =
     req.body
   try {
