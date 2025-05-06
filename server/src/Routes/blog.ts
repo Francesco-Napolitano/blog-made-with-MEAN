@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { Blog } from '../Models/blog.model'
 import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
+import { set } from 'mongoose'
 export const routerBlog = Router()
 
 //sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
@@ -26,10 +27,10 @@ routerBlog.get(
 )
 
 routerBlog.get(
-  '/:id',
-  wrap(async (id) => {
-    const postSelected = await Blog.findById(id)
-    console.log(postSelected)
+  '/:_id',
+  wrap(async (req, res) => {
+    const postSelected = await Blog.findById(req.params._id)
+    res.json(postSelected)
   })
 )
 
@@ -54,28 +55,35 @@ routerBlog.post(
   })
 )
 routerBlog.put(
-  '/:id/update',
+  '/:_id/update',
   authenticateJWT,
   authorizeRoles,
   wrap(async (req, res) => {
-    const id = req.params._id
+    const id = { _id: req.params._id }
     console.log(id)
-
-    let updatedBlog = {}
-    updatedBlog = req.body.title
-    updatedBlog = req.body.description
-    updatedBlog = req.body.image
-    updatedBlog = req.body.read_time
-    updatedBlog = req.body.date
-    updatedBlog = req.body.category
-    updatedBlog = req.body.author
-    await Blog.findByIdAndUpdate(id, updatedBlog)
-    res.status(200).send(updatedBlog)
+    const { title, description, image, read_time, date, category, author } =
+      req.body
+    const updatedPost = {
+      title,
+      description,
+      image,
+      read_time,
+      date,
+      category,
+      author,
+    }
+    await Blog.findOneAndUpdate(id, updatedPost)
+    console.log('Cosa hai modificato: ', updatedPost)
+    res.status(200).send(updatedPost)
   })
 )
 routerBlog.delete(
-  '/:id/delete',
+  '/:_id/delete',
   authorizeRoles,
   authenticateJWT,
-  async (req, res) => {}
+  wrap(async (req, res) => {
+    const id = { _id: req.params._id }
+    await Blog.findOneAndDelete(id)
+    res.status(200).send(Blog.find())
+  })
 )

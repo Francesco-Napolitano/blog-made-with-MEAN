@@ -23,6 +23,7 @@ app.use(express.json())
 app.use('/api/auth', router)
 app.use('/post', routerBlog)
 app.use(errorHandler)
+
 mongoose
   .connect(ATLAS_URI)
   .then(() => console.log('MongoDB Connected'))
