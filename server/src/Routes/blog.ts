@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { Blog } from '../Models/blog.model'
 import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
-import { set } from 'mongoose'
 export const routerBlog = Router()
 
 //sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
@@ -79,11 +78,12 @@ routerBlog.put(
 )
 routerBlog.delete(
   '/:_id/delete',
-  authorizeRoles,
   authenticateJWT,
+  authorizeRoles,
   wrap(async (req, res) => {
     const id = { _id: req.params._id }
-    await Blog.findOneAndDelete(id)
-    res.status(200).send(Blog.find())
+    const postSelected = await Blog.findById(req.params._id)
+    const deletedPost = await Blog.findOneAndDelete(id)
+    res.status(200).send(postSelected)
   })
 )

@@ -25,4 +25,12 @@ export const routes: Routes = [
       return m.LogoutComponent;
     },
   },
+  {
+    path: 'post',
+    pathMatch: 'full',
+    loadComponent: async () => {
+      const m = await import('./features/post/allpost/allpost.component');
+      return m.AllpostComponent;
+    },
+  },
 ];
