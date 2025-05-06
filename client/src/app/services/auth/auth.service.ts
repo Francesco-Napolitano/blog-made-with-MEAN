@@ -10,7 +10,6 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
   login(email: string, password: string) {
-    console.log(email, password + ' Console log del service');
     return this.http.post(`${this.url}/api/auth/login`, { email, password });
   }
 
