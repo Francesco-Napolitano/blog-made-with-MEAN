@@ -12,9 +12,10 @@ export class AllpostComponent implements OnInit {
   private postService = inject(PostService);
   //è la stessa cosa che scrivere i constructor private ma in questo modo riduci le righe ed è più efficiente
 
-  ngOnInit(): void {
-    this.postService
-      .getAllPosts()
-      .subscribe((allPost) => this.posts.set(allPost));
+  ngOnInit(): any {
+    this.postService.getAllPosts().subscribe((allPost) => {
+      console.log(allPost);
+      this.posts.set(allPost);
+    });
   }
 }
