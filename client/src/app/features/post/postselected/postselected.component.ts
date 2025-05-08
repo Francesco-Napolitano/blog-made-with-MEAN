@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Post } from '../../../shared/models/post.model';
 import { PostService } from '../../../services/post/post.service';
 import { ActivatedRoute } from '@angular/router';
+import { Post } from '../../../shared/models/post.model';
 
 @Component({
   selector: 'app-postselected',
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './postselected.component.scss',
 })
 export class PostselectedComponent implements OnInit {
-  postSelected = signal<Post[]>([]);
+  postSelected = signal<Post | null>(null);
   private postService = inject(PostService);
   private routeDynamic = inject(ActivatedRoute);
   id = this.routeDynamic.snapshot.paramMap.get('id');

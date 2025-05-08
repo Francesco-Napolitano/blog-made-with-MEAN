@@ -20,7 +20,7 @@ export class PostService {
   }
 
   getPostId() {
-    return this.http.get<Post[]>(`${this.url}/post/${this.idSelected()}`);
+    return this.http.get<Post>(`${this.url}/post/${this.idSelected()}`);
   }
 
   deletePost() {
