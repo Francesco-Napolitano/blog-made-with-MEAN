@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Post } from '../../../shared/models/post.model';
 import { PostService } from '../../../services/post/post.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-postselected',
@@ -11,7 +12,11 @@ import { PostService } from '../../../services/post/post.service';
 export class PostselectedComponent implements OnInit {
   postSelected = signal<Post[]>([]);
   private postService = inject(PostService);
-  ngOnInit(): void {
+  private routeDynamic = inject(ActivatedRoute);
+  id = this.routeDynamic.snapshot.paramMap.get('id');
+
+  ngOnInit(): any {
+    this.postService.postClicked(this.id);
     this.postService.getPostId().subscribe((post) => {
       console.log(post);
       this.postSelected.set(post);

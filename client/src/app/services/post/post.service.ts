@@ -8,17 +8,23 @@ import { Post } from '../../shared/models/post.model';
 export class PostService {
   private url = 'http://localhost:5200';
   http = inject(HttpClient);
+  idSelected = signal<string>('');
 
   getAllPosts() {
     return this.http.get<Post[]>(`${this.url}/post`);
   }
 
-  getPostId(id: string) {
-    return this.http.get<Post[]>(`${this.url}/post/${id}`);
+  postClicked(id: any) {
+    this.idSelected.set(id);
+    console.log(this.idSelected());
   }
 
-  deletePost(id: string) {
-    return this.http.delete(`${this.url}/post/${id}/delete`);
+  getPostId() {
+    return this.http.get<Post[]>(`${this.url}/post/${this.idSelected()}`);
+  }
+
+  deletePost() {
+    return this.http.delete(`${this.url}/post/${this.idSelected()}/delete`);
   }
 
   addPost(

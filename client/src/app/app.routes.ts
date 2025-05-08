@@ -33,4 +33,13 @@ export const routes: Routes = [
       return m.AllpostComponent;
     },
   },
+  {
+    path: `post/:id`,
+    loadComponent: async () => {
+      const m = await import(
+        './features/post/postselected/postselected.component'
+      );
+      return m.PostselectedComponent;
+    },
+  },
 ];

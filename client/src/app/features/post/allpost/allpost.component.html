@@ -1,24 +1,24 @@
 @for (post of posts(); track post._id) {
 <div class="flex-col mb-5 p-5 border-2 m-2 w-1/3">
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     TITOLO:<span class="font-bold"> {{ post.title }}</span>
   </p>
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     DESCRIPTION: <span class="font-bold"> {{ post.description }}</span>
   </p>
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     image: <span class="font-bold"> {{ post.image }}</span>
   </p>
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     read_time: <span class="font-bold"> {{ post.read_time }}</span>
   </p>
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     category: <span class="font-bold"> {{ post.category }}</span>
   </p>
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     author: <span class="font-bold"> {{ post.author }}</span>
   </p>
-  <p (click)="postClicked(post._id)">
+  <p [routerLink]="['/post', post._id]">
     date: <span class="font-bold"> {{ post.date }}</span>
   </p>
 </div>
