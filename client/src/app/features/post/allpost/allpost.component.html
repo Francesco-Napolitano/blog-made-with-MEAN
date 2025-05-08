@@ -1,1 +1,9 @@
-<p>{{ posts() }}</p>
+@for (post of posts(); track post._id) {
+<p>funziona? {{ post.title }}</p>
+<p>funziona? {{ post.description }}</p>
+<p>funziona? {{ post.image }}</p>
+<p>funziona? {{ post.read_time }}</p>
+<p>funziona? {{ post.category }}</p>
+<p>funziona? {{ post.author }}</p>
+<p>funziona? {{ post.date }}</p>
+}

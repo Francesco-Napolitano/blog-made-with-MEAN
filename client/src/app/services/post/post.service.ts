@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, Signal } from '@angular/core';
+import { Post } from '../../shared/models/post.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class PostService {
   constructor(private httpClient: HttpClient) {}
 
   getAllPosts() {
-    return this.http.get(`${this.url}/post`);
+    return this.http.get<Post[]>(`${this.url}/post`);
   }
 
   getPostId(id: string) {
