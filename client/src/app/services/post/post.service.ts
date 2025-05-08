@@ -9,14 +9,12 @@ export class PostService {
   private url = 'http://localhost:5200';
   http = inject(HttpClient);
 
-  constructor(private httpClient: HttpClient) {}
-
   getAllPosts() {
     return this.http.get<Post[]>(`${this.url}/post`);
   }
 
   getPostId(id: string) {
-    return this.http.get(`${this.url}/post/${id}`);
+    return this.http.get<Post[]>(`${this.url}/post/${id}`);
   }
 
   deletePost(id: string) {
