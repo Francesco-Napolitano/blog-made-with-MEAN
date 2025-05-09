@@ -1,1 +1,33 @@
-<p>{{ postSelected()?.title }}</p>
+<div class="flex-col mb-5 p-5 border-2 m-2 w-1/3">
+  <p>
+    TITOLO:<span class="font-bold"> {{ postSelected()?.title }}</span>
+  </p>
+  <p>
+    DESCRIPTION:
+    <span class="font-bold"> {{ postSelected()?.description }}</span>
+  </p>
+  <p>
+    image: <span class="font-bold"> {{ postSelected()?.image }}</span>
+  </p>
+  <p>
+    read_time: <span class="font-bold"> {{ postSelected()?.read_time }}</span>
+  </p>
+  <p>
+    category: <span class="font-bold"> {{ postSelected()?.category }}</span>
+  </p>
+  <p>
+    author: <span class="font-bold"> {{ postSelected()?.author }}</span>
+  </p>
+  <p>
+    date: <span class="font-bold"> {{ postSelected()?.date }}</span>
+  </p>
+</div>
+
+<div class="flex w-1/3 justify-center">
+  <button
+    (click)="deletePost()"
+    class="text-dark border-red-500 border-1 rounded px-3 py-2 hover:font-bold hover:border-3 cursor-pointer"
+  >
+    Elimina
+  </button>
+</div>

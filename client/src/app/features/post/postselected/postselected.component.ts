@@ -2,10 +2,11 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from '../../../shared/models/post.model';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-postselected',
-  imports: [],
+  imports: [MatButtonModule],
   templateUrl: './postselected.component.html',
   styleUrl: './postselected.component.scss',
 })
@@ -21,5 +22,10 @@ export class PostselectedComponent implements OnInit {
       console.log(post);
       this.postSelected.set(post);
     });
+  }
+  deletePost() {
+    this.postService.postClicked(this.id);
+    this.postService.deletePost().subscribe((post) => console.log(post));
+    console.log(this.postSelected);
   }
 }
