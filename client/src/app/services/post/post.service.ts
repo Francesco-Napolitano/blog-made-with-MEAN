@@ -9,6 +9,7 @@ export class PostService {
   private url = 'http://localhost:5200';
   http = inject(HttpClient);
   idSelected = signal<string>('');
+  token = sessionStorage.getItem('token');
 
   getAllPosts() {
     return this.http.get<Post[]>(`${this.url}/post`);
