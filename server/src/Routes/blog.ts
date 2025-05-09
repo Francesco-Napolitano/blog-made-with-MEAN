@@ -81,8 +81,7 @@ routerBlog.delete(
   authenticateJWT,
   authorizeRoles,
   wrap(async (req, res) => {
-    const postSelected = await Blog.findById(req.params._id)
     const deletedPost = await Blog.findOneAndDelete(req.params._id)
-    res.status(200).send(postSelected)
+    res.status(200).send(deletedPost)
   })
 )
