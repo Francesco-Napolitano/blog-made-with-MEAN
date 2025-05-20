@@ -1,5 +1,14 @@
+<div class="flex w-1/3 justify-center">
+  <button
+    [routerLink]="['/add/post']"
+    class="text-dark border-green-600 border-2 rounded p-3 m-5 hover:font-bold hover:border-3 cursor-pointer"
+  >
+    Add new post
+  </button>
+</div>
+
 @for (post of posts(); track post._id) {
-<div class="flex-col mb-5 p-5 border-2 m-2 w-1/3">
+<div class="flex-col mb-5 p-5 border-2 m-2 w-1/3 cursor-pointer">
   <p [routerLink]="['/post', post._id]">
     TITOLO:<span class="font-bold"> {{ post.title }}</span>
   </p>

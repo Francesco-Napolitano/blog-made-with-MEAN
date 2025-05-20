@@ -42,4 +42,11 @@ export const routes: Routes = [
       return m.PostselectedComponent;
     },
   },
+  {
+    path: 'add/post',
+    loadComponent: async () => {
+      const m = await import('./features/post/addpost/addpost.component');
+      return m.AddpostComponent;
+    },
+  },
 ];

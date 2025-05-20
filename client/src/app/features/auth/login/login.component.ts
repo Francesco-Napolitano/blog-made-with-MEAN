@@ -17,6 +17,7 @@ export class LoginComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
+
   onSubmit() {
     const { email, password } = this.profileForm.value;
 
