@@ -23,6 +23,7 @@ export class PostselectedComponent implements OnInit {
       this.postSelected.set(post);
     });
   }
+
   deletePost() {
     console.log(sessionStorage.getItem('token'));
     this.postService.deletePost().subscribe((post) => console.log(post));
