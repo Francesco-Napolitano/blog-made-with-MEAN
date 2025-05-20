@@ -1,12 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { PostService } from '../../../services/post/post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Post } from '../../../shared/models/post.model';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-postselected',
-  imports: [MatButtonModule],
+  imports: [RouterLink],
   templateUrl: './postselected.component.html',
   styleUrl: './postselected.component.scss',
 })

@@ -49,4 +49,12 @@ export const routes: Routes = [
       return m.AddpostComponent;
     },
   },
+
+  {
+    path: 'modify/post/:id',
+    loadComponent: async () => {
+      const m = await import('./features/post/modifypost/modifypost.component');
+      return m.ModifypostComponent;
+    },
+  },
 ];
