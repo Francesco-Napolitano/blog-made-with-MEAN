@@ -71,7 +71,7 @@ routerBlog.put(
       category,
       author,
     }
-    await Blog.findOneAndUpdate(id, updatedPost)
+    await Blog.findByIdAndUpdate(id, updatedPost)
     console.log('Cosa hai modificato: ', updatedPost)
     res.status(200).send(updatedPost)
   })

@@ -50,7 +50,7 @@ export class AddpostComponent {
           },
         });
     } else {
-      console.log('Errore nel ricevimento dati');
+      console.log('Errore nel ricevimento dati component.ts');
     }
   }
 }

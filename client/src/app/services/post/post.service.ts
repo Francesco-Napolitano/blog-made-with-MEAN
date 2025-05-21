@@ -53,7 +53,7 @@ export class PostService {
     description: string,
     image: string,
     read_time: string,
-    date: Date,
+    date: string,
     category: string,
     author: string
   ) {
