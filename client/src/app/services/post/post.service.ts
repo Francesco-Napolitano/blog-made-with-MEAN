@@ -57,7 +57,7 @@ export class PostService {
     category: string,
     author: string
   ) {
-    return this.http.put(`${this.url}/:_id/update`, {
+    return this.http.put(`${this.url}/post/${this.idSelected()}/update`, {
       title,
       description,
       image,

@@ -58,8 +58,7 @@ routerBlog.put(
   authenticateJWT,
   authorizeRoles,
   wrap(async (req, res) => {
-    const id = { _id: req.params._id }
-    console.log(id)
+    const id: Object = req.params._id
     const { title, description, image, read_time, date, category, author } =
       req.body
     const updatedPost = {
@@ -76,6 +75,7 @@ routerBlog.put(
     res.status(200).send(updatedPost)
   })
 )
+
 routerBlog.delete(
   '/:_id/delete',
   authenticateJWT,

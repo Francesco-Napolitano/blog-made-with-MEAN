@@ -1,83 +1,79 @@
-<form class="flex-col mb-5 p-5 border-2 m-2 w-1/3">
-  <form [formGroup]="profileForm" (submit)="onSubmit()">
-    <div>
-      <h1>Modify specific post</h1>
-      <label for="title">title: </label>
-      <input
-        class="border-1 m-3"
-        id="title"
-        type="text"
-        formControlName="title"
-        [value]="this.postSelected()?.title"
-        required
-      />
-      <label for="description">description: </label>
-      <input
-        id="description"
-        type="description"
-        formControlName="description"
-        [value]="postSelected()?.description"
-        required
-        class="border-1 m-3"
-      />
-    </div>
-    <div>
-      <label for="immagine">image: </label>
-      <input
-        id="immagine"
-        type="immagine"
-        formControlName="image"
-        required
-        [value]="postSelected()?.image"
-        class="border-1 m-3"
-      />
-      <label for="read_time">read_time: </label>
-      <input
-        id="read_time"
-        type="read_time"
-        [value]="postSelected()?.read_time"
-        formControlName="read_time"
-        required
-        class="border-1 m-3"
-      />
-    </div>
-    <div>
-      <label for="date">date: </label>
-      <input
-        id="date"
-        type="text"
-        formControlName="date"
-        onfocus="(this.type='date')"
-        required
-        [value]="postSelected()?.date"
-        class="border-1 m-3"
-      />
-      <label for="category">category: </label>
-      <input
-        id="category"
-        type="category"
-        formControlName="category"
-        required
-        [value]="postSelected()?.category"
-        class="border-1 m-3"
-      />
-    </div>
-    <label for="author">author: </label>
+<form [formGroup]="profileForm" (submit)="onSubmit()">
+  <div>
+    <h1>Modify specific post</h1>
+    <label for="title">title: </label>
     <input
-      id="author"
-      type="author"
-      formControlName="author"
+      class="border-1 m-3"
+      id="title"
+      type="text"
+      formControlName="title"
+      [value]="this.postSelected()?.title"
       required
-      [value]="postSelected()?.author"
+    />
+    <label for="description">description: </label>
+    <input
+      id="description"
+      type="description"
+      formControlName="description"
+      [value]="postSelected()?.description"
+      required
       class="border-1 m-3"
     />
+  </div>
+  <div>
+    <label for="immagine">image: </label>
+    <input
+      id="immagine"
+      type="immagine"
+      formControlName="image"
+      required
+      [value]="postSelected()?.image"
+      class="border-1 m-3"
+    />
+    <label for="read_time">read_time: </label>
+    <input
+      id="read_time"
+      type="read_time"
+      [value]="postSelected()?.read_time"
+      formControlName="read_time"
+      required
+      class="border-1 m-3"
+    />
+  </div>
+  <div>
+    <label for="date">date: </label>
+    <input
+      id="date"
+      type="date"
+      formControlName="date"
+      required
+      [value]="postSelected()?.date | date : 'yyyy-MM-dd'"
+      class="border-1 m-3"
+    />
+    <label for="category">category: </label>
+    <input
+      id="category"
+      type="category"
+      formControlName="category"
+      required
+      [value]="postSelected()?.category"
+      class="border-1 m-3"
+    />
+  </div>
+  <label for="author">author: </label>
+  <input
+    id="author"
+    type="author"
+    formControlName="author"
+    required
+    [value]="postSelected()?.author"
+    class="border-1 m-3"
+  />
 
-    <button
-      class="border-2 px-3 py-1 hover:bg-red-500 cursor-pointer"
-      type="submit"
-      [disabled]="!profileForm.valid"
-    >
-      Submit
-    </button>
-  </form>
+  <button
+    class="border-2 px-3 py-1 hover:bg-red-500 cursor-pointer"
+    type="submit"
+  >
+    Submit
+  </button>
 </form>
