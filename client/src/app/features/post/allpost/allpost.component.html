@@ -8,27 +8,32 @@
 </div>
 
 @for (post of posts(); track post._id) {
-<div class="flex-col mb-5 p-5 border-2 m-2 w-1/3 cursor-pointer">
-  <p [routerLink]="['/post', post._id]">
+
+<div
+  class="flex-col mb-5 p-5 border-2 m-2 w-1/3 cursor-pointer"
+  [routerLink]="['/post', post._id]"
+>
+  <p>
     TITOLO:<span class="font-bold"> {{ post.title }}</span>
   </p>
-  <p [routerLink]="['/post', post._id]">
+  <p>
     DESCRIPTION: <span class="font-bold"> {{ post.description }}</span>
   </p>
-  <p [routerLink]="['/post', post._id]">
+  <p>
     image: <span class="font-bold"> {{ post.image }}</span>
   </p>
-  <p [routerLink]="['/post', post._id]">
+  <p>
     read_time: <span class="font-bold"> {{ post.read_time }}</span>
   </p>
-  <p [routerLink]="['/post', post._id]">
+  <p>
     category: <span class="font-bold"> {{ post.category }}</span>
   </p>
-  <p [routerLink]="['/post', post._id]">
+  <p>
     author: <span class="font-bold"> {{ post.author }}</span>
   </p>
-  <p [routerLink]="['/post', post._id]">
-    date: <span class="font-bold"> {{ post.date }}</span>
+  <p>
+    date:
+    <span class="font-bold"> {{ post.date.toString().slice(0, 10) }} </span>
   </p>
 </div>
 }

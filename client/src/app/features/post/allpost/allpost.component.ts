@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './allpost.component.scss',
 })
 export class AllpostComponent implements OnInit {
-  posts = signal<Post[]>([]); //il problema che mi dava era dovuto al fatto che se non specifici <any> / <Post[]> il compilatore crede che il
+  posts = signal<Post[]>([]); //il problema che mi dava era dovuto al fatto che se non specifici <any> v <Post[]> il compilatore crede che il
   //                           signal sia di tipo never [] cioè un array che non può contenere nulla
   private postService = inject(PostService); //è la stessa cosa che scrivere i constructor private ma in questo modo riduci le righe del codice
 
