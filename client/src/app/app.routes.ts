@@ -34,15 +34,6 @@ export const routes: Routes = [
     },
   },
   {
-    path: `post/:id`,
-    loadComponent: async () => {
-      const m = await import(
-        './features/post/postselected/postselected.component'
-      );
-      return m.PostselectedComponent;
-    },
-  },
-  {
     path: 'add/post',
     loadComponent: async () => {
       const m = await import('./features/post/addpost/addpost.component');
@@ -55,6 +46,15 @@ export const routes: Routes = [
     loadComponent: async () => {
       const m = await import('./features/post/modifypost/modifypost.component');
       return m.ModifypostComponent;
+    },
+  },
+  {
+    path: `post/:id`,
+    loadComponent: async () => {
+      const m = await import(
+        './features/post/postselected/postselected.component'
+      );
+      return m.PostselectedComponent;
     },
   },
 ];

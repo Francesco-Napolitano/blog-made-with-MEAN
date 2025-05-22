@@ -35,7 +35,7 @@ export class ModifypostComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const { title, description, image, read_time, date, category, author } =
       this.profileForm.value;
     if (

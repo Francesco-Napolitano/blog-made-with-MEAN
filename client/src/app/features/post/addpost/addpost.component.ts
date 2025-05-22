@@ -24,7 +24,7 @@ export class AddpostComponent {
     author: ['', Validators.required],
   });
 
-  onSubmit() {
+  onSubmit(): void {
     const { title, description, image, read_time, date, category, author } =
       this.profileForm.value;
 
