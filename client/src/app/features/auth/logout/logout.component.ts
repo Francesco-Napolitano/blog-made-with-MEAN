@@ -11,8 +11,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './logout.component.scss',
 })
 export class LogoutComponent {
-  deleteToken() {
-    sessionStorage.removeItem('token');
+  deleteToken(): void {
+    sessionStorage.removeItem('user');
     console.log(sessionStorage);
   }
 }

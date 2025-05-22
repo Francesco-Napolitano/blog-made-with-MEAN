@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
   {
@@ -50,11 +51,19 @@ export const routes: Routes = [
   },
   {
     path: `post/:id`,
+    canActivate: [AuthGuard],
     loadComponent: async () => {
       const m = await import(
         './features/post/postselected/postselected.component'
       );
       return m.PostselectedComponent;
+    },
+  },
+  {
+    path: '**',
+    loadComponent: async () => {
+      const m = await import('./shared/notfound/notfound.component');
+      return m.NotfoundComponent;
     },
   },
 ];

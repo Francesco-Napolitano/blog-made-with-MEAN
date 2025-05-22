@@ -1,21 +1,27 @@
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  GuardResult,
-  MaybeAsync,
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
 
-export class authGuard implements CanActivate {
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
   authService = inject(AuthService);
   router = inject(Router);
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): MaybeAsync<GuardResult> {
-    throw new Error('Method not implemented.');
+  ): boolean {
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
 }
