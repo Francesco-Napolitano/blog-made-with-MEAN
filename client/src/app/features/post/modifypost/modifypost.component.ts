@@ -70,4 +70,10 @@ export class ModifypostComponent implements OnInit {
       console.log('Errore nel ricevimento dati component.ts');
     }
   }
+
+  deletePost(): void {
+    console.log(sessionStorage.getItem('token'));
+    this.postService.deletePost().subscribe((post) => console.log(post));
+    console.log(this.postSelected);
+  }
 }

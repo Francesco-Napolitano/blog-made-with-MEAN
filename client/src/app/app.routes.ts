@@ -36,14 +36,15 @@ export const routes: Routes = [
   },
   {
     path: 'add/post',
+    canActivate: [AuthGuard],
     loadComponent: async () => {
       const m = await import('./features/post/addpost/addpost.component');
       return m.AddpostComponent;
     },
   },
-
   {
     path: 'modify/post/:id',
+    canActivate: [AuthGuard],
     loadComponent: async () => {
       const m = await import('./features/post/modifypost/modifypost.component');
       return m.ModifypostComponent;
@@ -51,7 +52,6 @@ export const routes: Routes = [
   },
   {
     path: `post/:id`,
-    canActivate: [AuthGuard],
     loadComponent: async () => {
       const m = await import(
         './features/post/postselected/postselected.component'
