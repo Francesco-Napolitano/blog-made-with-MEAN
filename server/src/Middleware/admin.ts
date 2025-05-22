@@ -1,6 +1,6 @@
-const allowedRoles: String[] = ['ADMIN', 'AUTHOR']
+const allowedRoles: String[] = ['ADMIN']
 
-export const authorizeRoles = (req, res, next) => {
+export const isAdmin = (req, res, next) => {
   const user = req.user
   console.log('Accesso con email e password', user)
   if (!user || !allowedRoles.includes(user.role)) {

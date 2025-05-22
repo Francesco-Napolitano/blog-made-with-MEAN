@@ -33,6 +33,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const user = this.userSubject.value;
+    console.log('PROVA ROLE', sessionStorage);
     console.log('PROVA USER', user); // il valore di userSubject è un OGGETTO che contiene il token che il backend ritorna
     return user && user.token ? true : false;
   }

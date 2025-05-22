@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { Blog } from '../Models/blog.model'
 import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
+import { isAdmin } from '../Middleware/admin'
 export const routerBlog = Router()
 
 //sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
@@ -56,7 +57,7 @@ routerBlog.post(
 routerBlog.put(
   '/:_id/update',
   authenticateJWT,
-  authorizeRoles,
+  isAdmin,
   wrap(async (req, res) => {
     const id: Object = req.params._id
     const { title, description, image, read_time, date, category, author } =
@@ -79,7 +80,7 @@ routerBlog.put(
 routerBlog.delete(
   '/:_id/delete',
   authenticateJWT,
-  authorizeRoles,
+  isAdmin,
   wrap(async (req, res) => {
     const deletedPost = await Blog.findByIdAndDelete(req.params._id)
     res.status(200).send(deletedPost)
