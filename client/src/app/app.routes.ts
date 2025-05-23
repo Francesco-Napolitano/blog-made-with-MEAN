@@ -28,7 +28,6 @@ export const routes: Routes = [
   },
   {
     path: 'post',
-    pathMatch: 'full',
     loadComponent: async () => {
       const m = await import('./features/post/allpost/allpost.component');
       return m.AllpostComponent;
@@ -36,6 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'add/post',
+    pathMatch: 'full',
     canActivate: [AuthGuard],
     loadComponent: async () => {
       const m = await import('./features/post/addpost/addpost.component');
@@ -44,6 +44,7 @@ export const routes: Routes = [
   },
   {
     path: 'modify/post/:id',
+    pathMatch: 'full',
     canActivate: [AuthGuard],
     loadComponent: async () => {
       const m = await import('./features/post/modifypost/modifypost.component');
@@ -52,6 +53,7 @@ export const routes: Routes = [
   },
   {
     path: `post/:id`,
+    pathMatch: 'full',
     loadComponent: async () => {
       const m = await import(
         './features/post/postselected/postselected.component'
