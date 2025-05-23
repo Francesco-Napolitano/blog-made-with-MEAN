@@ -33,8 +33,20 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const user = this.userSubject.value;
-    console.log('PROVA ROLE', sessionStorage);
-    console.log('PROVA USER', user); // il valore di userSubject è un OGGETTO che contiene il token che il backend ritorna
+    console.log('PROVA USER', user); // il valore di userSubject è un OGGETTO che contiene il token riportato dal BACKEND
     return user && user.token ? true : false;
+  }
+
+  getUserRole(): boolean {
+    const token = sessionStorage.getItem('token');
+    console.log("COS'è??", token);
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log("COS'è (PT.2)", payload.role);
+      if (payload.role == 'ADMIN' || payload.role == 'AUTHOR') {
+        return true;
+      } else return false;
+    }
+    return false;
   }
 }

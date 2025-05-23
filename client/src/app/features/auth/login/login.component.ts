@@ -20,7 +20,6 @@ export class LoginComponent {
 
   onSubmit() {
     const { email, password } = this.profileForm.value;
-
     if (email && password) {
       this.authService.login(email, password).subscribe({
         next: (res: any) => {
