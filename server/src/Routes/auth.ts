@@ -1,11 +1,12 @@
 const express = require('express')
+import { rateLimiterAuth } from '../Middleware/rateLimiterAuth'
 import { User } from '../Models/user-model'
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 export const router = express.Router()
 
 // Register a new user
-router.post('/register', async (req, res) => {
+router.post('/register', rateLimiterAuth, async (req, res) => {
   const { name, email, password } = req.body
   try {
     const newUser = new User({ name, email, password })
@@ -17,7 +18,7 @@ router.post('/register', async (req, res) => {
 })
 
 //Login user and generate JWT token
-router.post('/login', async (req, res) => {
+router.post('/login', rateLimiterAuth, async (req, res) => {
   const { email, password } = req.body
   try {
     const user = await User.findOne({ email })
