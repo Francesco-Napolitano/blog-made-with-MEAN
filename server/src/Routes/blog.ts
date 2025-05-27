@@ -3,6 +3,7 @@ import { Blog } from '../Models/blog.model'
 import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
 import { isAdmin } from '../Middleware/admin'
+import { sanitizer } from '../Middleware/sanitizer'
 export const routerBlog = Router()
 
 //sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
@@ -38,6 +39,7 @@ routerBlog.post(
   '/add',
   authenticateJWT,
   authorizeRoles,
+  sanitizer,
   wrap(async (req, res) => {
     const { title, description, image, read_time, date, category, author } =
       req.body
@@ -58,6 +60,7 @@ routerBlog.put(
   '/:_id/update',
   authenticateJWT,
   isAdmin,
+  sanitizer,
   wrap(async (req, res) => {
     const id: Object = req.params._id
     const { title, description, image, read_time, date, category, author } =
