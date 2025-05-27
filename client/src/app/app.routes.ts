@@ -28,6 +28,7 @@ export const routes: Routes = [
   },
   {
     path: 'post',
+    pathMatch: 'full',
     loadComponent: async () => {
       const m = await import('./features/post/allpost/allpost.component');
       return m.AllpostComponent;
