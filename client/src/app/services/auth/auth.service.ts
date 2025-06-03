@@ -41,7 +41,8 @@ export class AuthService {
     const token = sessionStorage.getItem('token');
     console.log("COS'è??", token);
     if (token) {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = JSON.parse(atob(token.split('.')[1])); //questo valore restituisce il payload con all'interno le informazioni del token
+      //                                                             come il role, exp_date ecc.
       console.log("COS'è (PT.2)", payload.role);
       if (payload.role == 'ADMIN' || payload.role == 'AUTHOR') {
         return true;
