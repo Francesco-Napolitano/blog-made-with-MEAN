@@ -2,7 +2,7 @@ const express = require('express')
 import { rateLimiterAuth } from '../Middleware/rateLimiterAuth'
 import { sanitizer } from '../Middleware/sanitizer'
 import { User } from '../Models/user-model'
-import { query, validationResult } from 'express-validator'
+import { query, validationResult, body } from 'express-validator'
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 export const router = express.Router()
@@ -12,12 +12,13 @@ router.post(
   '/register',
   rateLimiterAuth,
   sanitizer,
-  query('filter')
-    .isString()
+  body('email')
     .notEmpty()
-    .withMessage('Must not be empty')
-    .isLength({ min: 3, max: 30 })
-    .withMessage('Must be at least 3-30 characters'),
+    .withMessage('Username cannot be empty')
+    .isLength({ min: 5, max: 32 })
+    .withMessage('Username must be at length 5-32')
+    .isString()
+    .withMessage('Username must be a string'),
   async (req, res) => {
     const { name, email, password } = req.body
     const result = validationResult(req)
@@ -26,7 +27,7 @@ router.post(
       await newUser.save()
       res.status(201).json({ message: 'User registered successfully' })
     } catch (error) {
-      console.log('RISULTATO', result)
+      console.log(result)
       res.status(400).json({ error: 'User not registered' })
     }
   }
