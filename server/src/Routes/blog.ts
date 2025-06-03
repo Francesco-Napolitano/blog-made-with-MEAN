@@ -4,6 +4,7 @@ import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
 import { isAdmin } from '../Middleware/admin'
 import { sanitizer } from '../Middleware/sanitizer'
+import { query } from 'express-validator'
 export const routerBlog = Router()
 
 //sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
