@@ -2,7 +2,7 @@ const express = require('express')
 import { rateLimiterAuth } from '../Middleware/rateLimiterAuth'
 import { sanitizer } from '../Middleware/sanitizer'
 import { User } from '../Models/user-model'
-import { query, validationResult, body } from 'express-validator'
+import { query, validationResult, body, matchedData } from 'express-validator'
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 export const router = express.Router()
@@ -16,22 +16,31 @@ router.post(
     body('email')
       .notEmpty()
       .withMessage('Username cannot be empty')
+      .isEmail()
+      .withMessage('Please provide a valid email address.')
+      .normalizeEmail()
       .isLength({ min: 5, max: 32 })
       .withMessage('Username must be at length 5-32')
-      .isString()
-      .withMessage('Username must be a string'),
+      .trim(),
+    // .notEmpty()
+    // .withMessage('Username cannot be empty')
+    // .isLength({ min: 5, max: 32 })
+    // .withMessage('Username must be at length 5-32')
+    // .isString()
+    // .withMessage('Username must be a string'),
     body('name').notEmpty(),
     body('password').notEmpty(),
   ],
   async (req, res) => {
-    const { name, email, password } = req.body
     const result = validationResult(req)
+    const data = matchedData(req)
     try {
-      const newUser = new User({ name, email, password })
+      const newUser = new User({ ...data })
       await newUser.save()
       res.status(201).json({ message: 'User registered successfully' })
     } catch (error) {
       console.log(result.array())
+      console.log(data)
       res.status(400).json({ error: 'User not registered' })
     }
   }
