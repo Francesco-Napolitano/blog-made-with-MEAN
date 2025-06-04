@@ -12,13 +12,17 @@ router.post(
   '/register',
   rateLimiterAuth,
   sanitizer,
-  body('email')
-    .notEmpty()
-    .withMessage('Username cannot be empty')
-    .isLength({ min: 5, max: 32 })
-    .withMessage('Username must be at length 5-32')
-    .isString()
-    .withMessage('Username must be a string'),
+  [
+    body('email')
+      .notEmpty()
+      .withMessage('Username cannot be empty')
+      .isLength({ min: 5, max: 32 })
+      .withMessage('Username must be at length 5-32')
+      .isString()
+      .withMessage('Username must be a string'),
+    body('name').notEmpty(),
+    body('password').notEmpty(),
+  ],
   async (req, res) => {
     const { name, email, password } = req.body
     const result = validationResult(req)
@@ -27,7 +31,7 @@ router.post(
       await newUser.save()
       res.status(201).json({ message: 'User registered successfully' })
     } catch (error) {
-      console.log(result)
+      console.log(result.array())
       res.status(400).json({ error: 'User not registered' })
     }
   }
