@@ -3,6 +3,7 @@ import { rateLimiterAuth } from '../Middleware/rateLimiterAuth'
 import { sanitizer } from '../Middleware/sanitizer'
 import { User } from '../Models/user-model'
 import { query, validationResult, body, matchedData } from 'express-validator'
+import { createUserValidationSchema } from '../Utils/validationSchemas'
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 export const router = express.Router()
@@ -12,25 +13,7 @@ router.post(
   '/register',
   rateLimiterAuth,
   sanitizer,
-  [
-    body('email')
-      .notEmpty()
-      .withMessage('Username cannot be empty')
-      .isEmail()
-      .withMessage('Please provide a valid email address.')
-      .normalizeEmail()
-      .isLength({ min: 5, max: 32 })
-      .withMessage('Username must be at length 5-32')
-      .trim(),
-    // .notEmpty()
-    // .withMessage('Username cannot be empty')
-    // .isLength({ min: 5, max: 32 })
-    // .withMessage('Username must be at length 5-32')
-    // .isString()
-    // .withMessage('Username must be a string'),
-    body('name').notEmpty(),
-    body('password').notEmpty(),
-  ],
+  createUserValidationSchema,
   async (req, res) => {
     const result = validationResult(req)
     const data = matchedData(req)
