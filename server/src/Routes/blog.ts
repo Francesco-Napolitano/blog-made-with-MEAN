@@ -30,6 +30,7 @@ routerBlog.get(
 
 routerBlog.get(
   '/:_id',
+  query('_id').isString().notEmpty().isMongoId(),
   wrap(async (req, res) => {
     const postSelected = await Blog.findById(req.params._id)
     res.json(postSelected)
