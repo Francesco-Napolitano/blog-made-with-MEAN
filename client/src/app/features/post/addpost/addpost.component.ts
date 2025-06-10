@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../../../services/post/post.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-addpost',

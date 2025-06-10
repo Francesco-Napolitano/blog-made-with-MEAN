@@ -44,17 +44,21 @@ routerBlog.post(
   authorizeRoles,
   sanitizer,
   postBlogValidationSchema,
-  wrap(async (req, res) => {
+  async (req, res) => {
     const result = validationResult(req)
     const data = matchedData(req)
-    const newPost = new Blog({
-      ...data,
-    })
-    await newPost.save()
-    res.status(201).json({ message: 'Post added successfully' })
-    console.log(result.array())
-    console.log(data)
-  })
+    try {
+      const newPost = new Blog({
+        ...data,
+      })
+      await newPost.save()
+      res.status(201).json({ message: 'Post added successfully' })
+    } catch (error) {
+      console.log(result.array())
+      console.log(data)
+      res.status(400).json({ error: 'Post not added' })
+    }
+  }
 )
 
 routerBlog.put(

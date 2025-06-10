@@ -16,7 +16,6 @@ router.post(
   sanitizer,
   createUserValidationSchema,
   async (req, res) => {
-    const result = validationResult(req)
     const data = matchedData(req)
     try {
       const newUser = new User({ ...data })
