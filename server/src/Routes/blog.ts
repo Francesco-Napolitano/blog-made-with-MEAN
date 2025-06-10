@@ -4,7 +4,8 @@ import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
 import { isAdmin } from '../Middleware/admin'
 import { sanitizer } from '../Middleware/sanitizer'
-import { query } from 'express-validator'
+import { matchedData, query, validationResult } from 'express-validator'
+import { postBlogValidationSchema } from '../Utils/validationPostBlog'
 export const routerBlog = Router()
 
 //sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
@@ -42,22 +43,20 @@ routerBlog.post(
   authenticateJWT,
   authorizeRoles,
   sanitizer,
+  postBlogValidationSchema,
   wrap(async (req, res) => {
-    const { title, description, image, read_time, date, category, author } =
-      req.body
+    const result = validationResult(req)
+    const data = matchedData(req)
     const newPost = new Blog({
-      title,
-      description,
-      image,
-      read_time,
-      date,
-      category,
-      author,
+      ...data,
     })
     await newPost.save()
     res.status(201).json({ message: 'Post added successfully' })
+    console.log(result.array())
+    console.log(data)
   })
 )
+
 routerBlog.put(
   '/:_id/update',
   authenticateJWT,
