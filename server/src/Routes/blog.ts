@@ -4,7 +4,7 @@ import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
 import { isAdmin } from '../Middleware/admin'
 import { sanitizer } from '../Middleware/sanitizer'
-import { matchedData, query, validationResult } from 'express-validator'
+import { matchedData, param, query, validationResult } from 'express-validator'
 import { postBlogValidationSchema } from '../Utils/validationPostBlog'
 export const routerBlog = Router()
 
@@ -20,7 +20,7 @@ routerBlog.get(
 
 routerBlog.get(
   '/:_id',
-  query('_id').isString().notEmpty().isMongoId(),
+  param('_id').isString().notEmpty().isMongoId(),
   wrap(async (req, res) => {
     const postSelected = await Blog.findById(req.params._id)
     res.json(postSelected)
@@ -76,7 +76,7 @@ routerBlog.delete(
   '/:_id/delete',
   authenticateJWT,
   isAdmin,
-  query('_id').exists().withMessage('ID DO NOT EXISTS').isMongoId(),
+  param('_id').exists().withMessage('ID DO NOT EXISTS').isMongoId(),
   wrap(async (req, res) => {
     const deletedPost = await Blog.findByIdAndDelete(req.params._id)
     res.status(200).send(deletedPost)
