@@ -66,23 +66,21 @@ routerBlog.put(
   authenticateJWT,
   isAdmin,
   sanitizer,
-  wrap(async (req, res) => {
-    const id: Object = req.params._id
-    const { title, description, image, read_time, date, category, author } =
-      req.body
-    const updatedPost = {
-      title,
-      description,
-      image,
-      read_time,
-      date,
-      category,
-      author,
+  postBlogValidationSchema,
+  async (req, res) => {
+    const result = validationResult(req)
+    const data = matchedData(req)
+    try {
+      const id: Object = req.params._id
+      await Blog.findByIdAndUpdate(id, data)
+      console.log('Cosa hai modificato: ', data)
+      res.status(200).send(data)
+    } catch (error) {
+      console.log(result.array())
+      console.log(data)
+      res.status(400).json({ error: 'Post not modified' })
     }
-    await Blog.findByIdAndUpdate(id, updatedPost)
-    console.log('Cosa hai modificato: ', updatedPost)
-    res.status(200).send(updatedPost)
-  })
+  }
 )
 
 routerBlog.delete(
