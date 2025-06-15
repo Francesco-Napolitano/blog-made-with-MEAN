@@ -8,18 +8,7 @@ import { matchedData, query, validationResult } from 'express-validator'
 import { postBlogValidationSchema } from '../Utils/validationPostBlog'
 export const routerBlog = Router()
 
-//sarebbe possibile anche inserirla in un altro file in una cartella Utils e chiamare
-//il file ad esempio tryCatch.ts
 const wrap = (fn) => (req, res, next) => fn(req, res, next).catch(next)
-// const asyncWrapper = (fn) => { QUESTA è LA STESSA VERSIONE MA PIù LUNGA
-//   return async (req, res, next) => { //fn sta per FUNCTION
-//     try {
-//       await fn(req, res, next);
-//     } catch (error) {
-//       next(error); // Passes error to error handling middleware
-//     }
-//   };
-// };
 
 routerBlog.get(
   '/',
@@ -87,6 +76,7 @@ routerBlog.delete(
   '/:_id/delete',
   authenticateJWT,
   isAdmin,
+  query('_id').exists().withMessage('ID DO NOT EXISTS').isMongoId(),
   wrap(async (req, res) => {
     const deletedPost = await Blog.findByIdAndDelete(req.params._id)
     res.status(200).send(deletedPost)
