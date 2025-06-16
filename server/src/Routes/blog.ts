@@ -4,7 +4,7 @@ import { authorizeRoles } from '../Middleware/roles'
 import { authenticateJWT } from '../Middleware/Auth'
 import { isAdmin } from '../Middleware/admin'
 import { sanitizer } from '../Middleware/sanitizer'
-import { matchedData, param, query, validationResult } from 'express-validator'
+import { matchedData, param, validationResult } from 'express-validator'
 import { postBlogValidationSchema } from '../Utils/validationPostBlog'
 export const routerBlog = Router()
 
